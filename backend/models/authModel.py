@@ -12,8 +12,8 @@ class User(BaseModel):
     email: EmailStr =Field(...)
     password: str =Field(...,min_length=6) 
     role: Optional[RolesEnum] =Field(default=RolesEnum.buyer)
-    created_at: datetime =Field(default=datetime.now)
-    updated_at: datetime =Field(default=datetime.now)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     
     @field_validator('name')
     def validate_name(cls,value):
